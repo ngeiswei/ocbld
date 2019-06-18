@@ -118,7 +118,7 @@ opencog() {
 }
 
 asmoses() {
-    cd "$OC_DIR/asmoses"
+    cd "$OC_DIR/as-moses"
     build
     cd ..
 }

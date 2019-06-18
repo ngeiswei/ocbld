@@ -1,0 +1,142 @@
+#!/bin/bash
+
+# Tool for cleaning, building and installing atomspace repositories
+
+# set -x
+
+#############
+# Constants #
+#############
+
+OC_DIR=~/OpenCog
+NJOBS=4
+
+#############
+# Functions #
+#############
+
+# Info level logging
+infoEcho() {
+    echo "[INFO] $@"
+}
+
+# Warning level logging on stderr
+warning() {
+    echo "[WARN] $@" 1>&2
+}
+
+# Error level logging on stderr and exit
+fatalError() {
+    echo "[ERROR] $@" 1>&2
+    exit 1
+}
+
+parse_opt() {
+    case $1 in
+        uninstall)
+            infoEcho "Uninstall OpenCog from system"
+            uninstall
+            ;;
+        clean)
+            infoEcho "Enable clean"
+            CLEAN=yes
+            ;;
+        debug)
+            infoEcho "Enable debug"
+            DEBUG=yes
+            ;;
+        cogutil)
+            infoEcho "Build cogutil"
+            cogutil
+            ;;
+        atomspace)
+            infoEcho "Build atomspace"
+            atomspace
+            ;;
+        opencog)
+            infoEcho "Build opencog"
+            opencog
+            ;;
+        asmoses)
+            infoEcho "Build asmoses"
+            asmoses
+            ;;
+        *)
+    esac
+}
+
+uninstall() {
+    sudo rm -fr /usr/local/include/opencog
+    sudo rm -fr /usr/local/share/opencog
+    sudo rm -fr /usr/local/lib/opencog
+    sudo rm -fr /usr/share/guile/site/2.2/opencog*
+    sudo rm -fr /usr/local/share/guile/site/2.2/opencog*
+    rm -fr ~/.cache/guile
+}
+
+build() {
+    # Build and install the current repository
+    if [[ $DEBUG == yes ]]; then
+        local BUILD_DIR=build-debug
+    else
+        local BUILD_DIR=build
+    fi
+    if [[ $CLEAN == yes ]]; then
+        rm -fr "$BUILD_DIR"
+        mkdir "$BUILD_DIR"
+    fi
+    cd "$BUILD_DIR"
+    if [[ $DEBUG == yes ]]; then
+        cmake ..
+    else
+        cmake .. -DCMAKE_BUILD_TYPE=Debug
+    fi
+    make -j${NJOBS} && sudo make install
+    cd ..
+
+    # Update RTags index
+    cmake -DCMAKE_EXPORT_COMPILE_COMMANDS=1 "$BUILD_DIR"
+    rc -J $BUILD_DIR
+}
+
+cogutil() {
+    cd "$OC_DIR/cogutil"
+    build
+    cd ..
+}
+
+atomspace() {
+    cd "$OC_DIR/atomspace"
+    build
+    cd ..
+}
+
+opencog() {
+    cd "$OC_DIR/opencog"
+    build
+    cd ..
+}
+
+asmoses() {
+    cd "$OC_DIR/asmoses"
+    build
+    cd ..
+}
+
+########
+# Main #
+########
+
+if [[ $# == 0 ]]; then
+    echo "Wrong number of arguments"
+    echo "Usage: $0 [uninstall] [clean] [debug] [cogutil] [atomspace] [opencog] [asmoses]"
+    echo "uninstall: uninstall opencog from system"
+    echo "clean: clean building directory before building"
+    echo "clean: build in Debug mode"
+    echo "cogutil|atomspace|opencog|asmoses: buid and install the given component"
+    exit 1
+fi
+
+for arg in "$@"; do
+    parse_opt "$arg"
+done

@@ -87,9 +87,9 @@ build() {
     fi
     cd "$BUILD_DIR"
     if [[ $DEBUG == yes ]]; then
-        cmake ..
-    else
         cmake .. -DCMAKE_BUILD_TYPE=Debug
+    else
+        cmake ..
     fi
     make -j${NJOBS} && sudo make install
     cd ..

@@ -71,6 +71,7 @@ uninstall() {
     sudo rm -fr /usr/local/lib/opencog
     sudo rm -fr /usr/share/guile/site/2.2/opencog*
     sudo rm -fr /usr/local/share/guile/site/2.2/opencog*
+    sudo rm -fr /usr/local/lib/python*/dist-packages/opencog
     rm -fr ~/.cache/guile
 }
 

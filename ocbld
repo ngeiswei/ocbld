@@ -134,7 +134,7 @@ if [[ $# == 0 ]]; then
     echo "uninstall: uninstall opencog from system"
     echo "clean: clean building directory before building"
     echo "debug: build in Debug mode"
-    echo "cogutil|atomspace|opencog|asmoses: buid and install the given component"
+    echo "cogutil|atomspace|opencog|asmoses: build and install the given component(s)"
     exit 1
 fi
 

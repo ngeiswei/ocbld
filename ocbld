@@ -84,8 +84,8 @@ build() {
     fi
     if [[ $CLEAN == yes ]]; then
         rm -fr "$BUILD_DIR"
-        mkdir "$BUILD_DIR"
     fi
+    mkdir "$BUILD_DIR" &> /dev/null
     cd "$BUILD_DIR"
     if [[ $DEBUG == yes ]]; then
         cmake .. -DCMAKE_BUILD_TYPE=Debug

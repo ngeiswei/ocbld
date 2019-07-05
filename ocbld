@@ -69,9 +69,13 @@ uninstall() {
     sudo rm -fr /usr/local/include/opencog
     sudo rm -fr /usr/local/share/opencog
     sudo rm -fr /usr/local/lib/opencog
+    sudo rm -fr /usr/local/etc/opencog*
     sudo rm -fr /usr/share/guile/site/2.2/opencog*
     sudo rm -fr /usr/local/share/guile/site/2.2/opencog*
     sudo rm -fr /usr/local/lib/python*/dist-packages/opencog
+    sudo rm -fr /usr/local/lib/CogUtil
+    sudo rm -fr /usr/local/lib/AtomSpace
+    sudo rm -fr /usr/local/lib/ASMoses
     rm -fr ~/.cache/guile
 }
 

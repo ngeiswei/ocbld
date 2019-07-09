@@ -53,6 +53,10 @@ parse_opt() {
             infoEcho "Build atomspace"
             atomspace
             ;;
+        ure)
+            infoEcho "Build ure"
+            ure
+            ;;
         opencog)
             infoEcho "Build opencog"
             opencog
@@ -73,9 +77,10 @@ uninstall() {
     sudo rm -fr /usr/share/guile/site/2.2/opencog*
     sudo rm -fr /usr/local/share/guile/site/2.2/opencog*
     sudo rm -fr /usr/local/lib/python*/dist-packages/opencog
-    sudo rm -fr /usr/local/lib/CogUtil
-    sudo rm -fr /usr/local/lib/AtomSpace
-    sudo rm -fr /usr/local/lib/ASMoses
+    sudo rm -fr /usr/local/lib/cmake/CogUtil
+    sudo rm -fr /usr/local/lib/cmake/AtomSpace
+    sudo rm -fr /usr/local/lib/cmake/ASMoses
+    sudo rm -fr /usr/local/lib/cmake/URE
     rm -fr ~/.cache/guile
 }
 
@@ -116,6 +121,12 @@ atomspace() {
     cd ..
 }
 
+ure() {
+    cd "$OC_DIR/ure"
+    build
+    cd ..
+}
+
 opencog() {
     cd "$OC_DIR/opencog"
     build
@@ -134,7 +145,7 @@ asmoses() {
 
 if [[ $# == 0 ]]; then
     echo "Wrong number of arguments"
-    echo "Usage: $0 [uninstall] [clean] [debug] [cogutil] [atomspace] [opencog] [asmoses]"
+    echo "Usage: $0 [uninstall] [clean] [debug] [cogutil] [atomspace] [ure] [opencog] [asmoses]"
     echo "uninstall: uninstall opencog from system"
     echo "clean: clean building directory before building"
     echo "debug: build in Debug mode"

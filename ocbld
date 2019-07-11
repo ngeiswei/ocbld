@@ -105,8 +105,11 @@ build() {
     cd ..
 
     # Update RTags index
-    cmake -DCMAKE_EXPORT_COMPILE_COMMANDS=1 "$BUILD_DIR"
-    rc -J $BUILD_DIR
+    if [ -x "$(command -v rc)" ]; then
+        infoEcho "Update RTags"
+        cmake -DCMAKE_EXPORT_COMPILE_COMMANDS=1 "$BUILD_DIR"
+        rc -J $BUILD_DIR
+    fi
 }
 
 cogutil() {

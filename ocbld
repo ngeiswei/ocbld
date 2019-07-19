@@ -57,13 +57,21 @@ parse_opt() {
             infoEcho "Build ure"
             ure
             ;;
-        opencog)
-            infoEcho "Build opencog"
-            opencog
+        miner)
+            infoEcho "Build miner"
+            miner
+            ;;
+        moses)
+            infoEcho "Build moses"
+            moses
             ;;
         asmoses)
             infoEcho "Build asmoses"
             asmoses
+            ;;
+        opencog)
+            infoEcho "Build opencog"
+            opencog
             ;;
         *)
     esac
@@ -130,8 +138,14 @@ ure() {
     cd ..
 }
 
-opencog() {
-    cd "$OC_DIR/opencog"
+miner() {
+    cd "$OC_DIR/miner"
+    build
+    cd ..
+}
+
+moses() {
+    cd "$OC_DIR/moses"
     build
     cd ..
 }
@@ -142,17 +156,23 @@ asmoses() {
     cd ..
 }
 
+opencog() {
+    cd "$OC_DIR/opencog"
+    build
+    cd ..
+}
+
 ########
 # Main #
 ########
 
 if [[ $# == 0 ]]; then
     echo "Wrong number of arguments"
-    echo "Usage: $0 [uninstall] [clean] [debug] [cogutil] [atomspace] [ure] [opencog] [asmoses]"
+    echo "Usage: $0 [uninstall] [clean] [debug] [cogutil] [atomspace] [ure] [miner] [moses] [asmoses] [opencog]"
     echo "uninstall: uninstall opencog from system"
     echo "clean: clean building directory before building"
     echo "debug: build in Debug mode"
-    echo "cogutil|atomspace|opencog|asmoses: build and install the given component(s)"
+    echo "cogutil|...|opencog: build and install the given component(s)"
     exit 1
 fi
 

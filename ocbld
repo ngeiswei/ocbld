@@ -41,6 +41,10 @@ parse_opt() {
             infoEcho "Enable clean"
             CLEAN=yes
             ;;
+        clear)
+            infoEcho "Enable clean"
+            CLEAN=yes
+            ;;
         debug)
             infoEcho "Enable debug"
             DEBUG=yes

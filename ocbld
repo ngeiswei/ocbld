@@ -124,6 +124,9 @@ build() {
     make -j${NJOBS} && sudo make install
     cd ..
 
+    # Update ldconfig, just in case
+    sudo ldconfig /usr/local/lib/opencog
+
     # Update RTags index
     if [ -x "$(command -v rc)" ]; then
         infoEcho "Update RTags"

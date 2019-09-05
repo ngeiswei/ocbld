@@ -73,6 +73,14 @@ parse_opt() {
             infoEcho "Build asmoses"
             asmoses
             ;;
+        distributional-value)
+            infoEcho "Build distributional-value"
+            distvalue
+            ;;
+        agi-bio)
+            infoEcho "Build agi-bio"
+            agibio
+            ;;
         opencog)
             infoEcho "Build opencog"
             opencog
@@ -160,6 +168,18 @@ asmoses() {
     cd ..
 }
 
+distvalue() {
+    cd "$OC_DIR/distributional-value"
+    build
+    cd ..
+}
+
+agibio() {
+    cd "$OC_DIR/agi-bio"
+    build
+    cd ..
+}
+
 opencog() {
     cd "$OC_DIR/opencog"
     build
@@ -172,7 +192,7 @@ opencog() {
 
 if [[ $# == 0 ]]; then
     echo "Wrong number of arguments"
-    echo "Usage: $0 [uninstall] [clean] [debug] [cogutil] [atomspace] [ure] [miner] [moses] [asmoses] [opencog]"
+    echo "Usage: $0 [uninstall] [clean] [debug] [cogutil] [atomspace] [ure] [miner] [moses] [asmoses] [distributional-value] [agi-bio] [opencog]"
     echo "uninstall: uninstall opencog from system"
     echo "clean: clean building directory before building"
     echo "debug: build in Debug mode"

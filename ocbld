@@ -65,6 +65,9 @@ parse_opt() {
             infoEcho "Build miner"
             miner
             ;;
+        pln)
+            infoEcho "Build pln"
+            pln
         moses)
             infoEcho "Build moses"
             moses
@@ -159,6 +162,12 @@ miner() {
     cd ..
 }
 
+pln() {
+    cd "$OC_DIR/pln"
+    build
+    cd ..
+}
+
 moses() {
     cd "$OC_DIR/moses"
     build
@@ -195,7 +204,7 @@ opencog() {
 
 if [[ $# == 0 ]]; then
     echo "Wrong number of arguments"
-    echo "Usage: $0 [uninstall] [clean] [debug] [cogutil] [atomspace] [ure] [miner] [moses] [asmoses] [distributional-value] [agi-bio] [opencog]"
+    echo "Usage: $0 [uninstall] [clean] [debug] [cogutil] [atomspace] [ure] [miner] [pln] [moses] [asmoses] [distributional-value] [agi-bio] [opencog]"
     echo "uninstall: uninstall opencog from system"
     echo "clean: clean building directory before building"
     echo "debug: build in Debug mode"

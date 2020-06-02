@@ -81,13 +81,21 @@ parse_opt() {
             infoEcho "Build distributional-value"
             distvalue
             ;;
-        agi-bio)
-            infoEcho "Build agi-bio"
-            agibio
+        cogserver)
+            infoEcho "Build cogserver"
+            cogserver
+            ;;
+        attention)
+            infoEcho "Build attention"
+            attention
             ;;
         opencog)
             infoEcho "Build opencog"
             opencog
+            ;;
+        agi-bio)
+            infoEcho "Build agi-bio"
+            agibio
             ;;
         *)
     esac
@@ -187,8 +195,14 @@ distvalue() {
     cd ..
 }
 
-agibio() {
-    cd "$OC_DIR/agi-bio"
+cogserver() {
+    cd "$OC_DIR/cogserver"
+    build
+    cd ..
+}
+
+attention() {
+    cd "$OC_DIR/attention"
     build
     cd ..
 }
@@ -199,13 +213,19 @@ opencog() {
     cd ..
 }
 
+agibio() {
+    cd "$OC_DIR/agi-bio"
+    build
+    cd ..
+}
+
 ########
 # Main #
 ########
 
 if [[ $# == 0 ]]; then
     echo "Wrong number of arguments"
-    echo "Usage: $0 [uninstall] [clean] [debug] [cogutil] [atomspace] [ure] [miner] [pln] [moses] [asmoses] [distributional-value] [agi-bio] [opencog]"
+    echo "Usage: $0 [uninstall] [clean] [debug] [cogutil] [atomspace] [ure] [miner] [pln] [moses] [asmoses] [distributional-value] [cogserver] [attention] [opencog] [agi-bio]"
     echo "uninstall: uninstall opencog from system"
     echo "clean: clean building directory before building"
     echo "debug: build in Debug mode"

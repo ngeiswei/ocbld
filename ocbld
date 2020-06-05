@@ -110,9 +110,13 @@ uninstall() {
     sudo rm -fr /usr/local/share/guile/site/2.2/opencog*
     sudo rm -fr /usr/local/lib/python*/dist-packages/opencog
     sudo rm -fr /usr/local/lib/cmake/CogUtil
+    sudo rm -fr /usr/local/lib/cmake/Moses
     sudo rm -fr /usr/local/lib/cmake/AtomSpace
     sudo rm -fr /usr/local/lib/cmake/ASMoses
     sudo rm -fr /usr/local/lib/cmake/URE
+    sudo rm -fr /usr/local/lib/cmake/AttentionBank
+    sudo rm -fr /usr/local/lib/cmake/CogServer
+    sudo rm -fr /usr/local/lib/cmake/PLN
     rm -fr ~/.cache/guile
 }
 

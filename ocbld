@@ -147,6 +147,7 @@ build() {
     cd ..
 
     # Update ldconfig, just in case
+    sudo ldconfig /usr/local/lib
     sudo ldconfig /usr/local/lib/opencog
 
     # Update RTags index

@@ -254,10 +254,11 @@ agibio() {
 
 if [[ $# == 0 ]]; then
     echo "Wrong number of arguments"
-    echo "Usage: $0 [uninstall] [clean] [debug] [cogutil] [atomspace] [ure] [miner] [spacetime] [pln] [moses] [asmoses] [distributional-value] [cogserver] [attention] [opencog] [agi-bio]"
+    echo "Usage: $0 [uninstall] [clean] [debug] [status] [cogutil] [atomspace] [ure] [miner] [spacetime] [pln] [moses] [asmoses] [distributional-value] [cogserver] [attention] [opencog] [agi-bio]"
     echo "uninstall: uninstall opencog from system"
     echo "clean: clean building directory before building"
     echo "debug: build in Debug mode"
+    echo "status: do not build anything, display git status instead"
     echo "cogutil|...|opencog: build and install the given component(s)"
     exit 1
 fi

@@ -8,7 +8,7 @@
 # Constants #
 #############
 
-OC_DIR=~/OpenCog
+OC_DIR=~/Work/OpenCog
 NJOBS=4
 
 #############

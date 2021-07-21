@@ -97,6 +97,10 @@ parse_opt() {
             infoEcho "Build attention"
             attention
             ;;
+        lg-atomese)
+            infoEcho "Build lg-atomese"
+            lgatomese
+            ;;
         opencog)
             infoEcho "Build opencog"
             opencog
@@ -232,6 +236,12 @@ cogserver() {
 
 attention() {
     cd "$OC_DIR/attention"
+    build
+    cd ..
+}
+
+lgatomese() {
+    cd "$OC_DIR/lg-atomese"
     build
     cd ..
 }

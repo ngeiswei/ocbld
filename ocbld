@@ -49,10 +49,10 @@ parse_opt() {
             infoEcho "Enable debug"
             DEBUG=yes
             ;;
-	status)
-	    infoEcho "Enable status"
-	    STATUS=yes
-	    ;;
+        status)
+            infoEcho "Enable status"
+            STATUS=yes
+            ;;
         cogutil)
             infoEcho "Build cogutil"
             cogutil
@@ -140,37 +140,37 @@ uninstall() {
 
 build() {
     if [[ $STATUS == yes ]]; then
-	git status
+        git status
     else
-	# Build and install the current repository
-	if [[ $DEBUG == yes ]]; then
+        # Build and install the current repository
+        if [[ $DEBUG == yes ]]; then
             local BUILD_DIR=build-debug
-	else
+        else
             local BUILD_DIR=build
-	fi
-	if [[ $CLEAN == yes ]]; then
+        fi
+        if [[ $CLEAN == yes ]]; then
             rm -fr "$BUILD_DIR"
-	fi
-	mkdir "$BUILD_DIR" &> /dev/null
-	cd "$BUILD_DIR"
-	if [[ $DEBUG == yes ]]; then
+        fi
+        mkdir "$BUILD_DIR" &> /dev/null
+        cd "$BUILD_DIR"
+        if [[ $DEBUG == yes ]]; then
             cmake .. -DCMAKE_BUILD_TYPE=Debug
-	else
+        else
             cmake ..
-	fi
-	make -j${NJOBS} && sudo make install
-	cd ..
+        fi
+        make -j${NJOBS} && sudo make install
+        cd ..
 
-	# Update ldconfig, just in case
-	sudo ldconfig /usr/local/lib
-	sudo ldconfig /usr/local/lib/opencog
+        # Update ldconfig, just in case
+        sudo ldconfig /usr/local/lib
+        sudo ldconfig /usr/local/lib/opencog
 
-	# Update RTags index
-	if [ -x "$(command -v rc)" ]; then
+        # Update RTags index
+        if [ -x "$(command -v rc)" ]; then
             infoEcho "Update RTags"
             cmake -DCMAKE_EXPORT_COMPILE_COMMANDS=1 "$BUILD_DIR"
             rc -J $BUILD_DIR
-	fi
+        fi
     fi
 }
 

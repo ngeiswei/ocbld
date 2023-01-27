@@ -61,6 +61,10 @@ parse_opt() {
             infoEcho "Build atomspace"
             atomspace
             ;;
+        unify)
+            infoEcho "Build unify"
+            unify
+            ;;
         ure)
             infoEcho "Build ure"
             ure
@@ -130,6 +134,7 @@ uninstall() {
     sudo rm -fr /usr/local/lib/cmake/Moses
     sudo rm -fr /usr/local/lib/cmake/AtomSpace
     sudo rm -fr /usr/local/lib/cmake/ASMoses
+    sudo rm -fr /usr/local/lib/cmake/Unify
     sudo rm -fr /usr/local/lib/cmake/URE
     sudo rm -fr /usr/local/lib/cmake/AttentionBank
     sudo rm -fr /usr/local/lib/cmake/CogServer
@@ -182,6 +187,12 @@ cogutil() {
 
 atomspace() {
     cd "$OC_DIR/atomspace"
+    build
+    cd ..
+}
+
+unify() {
+    cd "$OC_DIR/unify"
     build
     cd ..
 }
